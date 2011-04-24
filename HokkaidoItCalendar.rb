@@ -7,12 +7,10 @@ class HokkaidoItCalendar
   CALENDAR_URL = 'http://www.google.com/calendar/ical/fvijvohm91uifvd9hratehf65k%40group.calendar.google.com/public/basic.ics'
   def create
     data = Icalendar::Calendar.new
-    basedate = get_base_datetime
-
     open(CALENDAR_URL) {|f|
       cal = Icalendar.parse(f).first
       cal.events.each { |event|
-        if DateTime.parse(basedate) <= event.created and event.summary.match(KEYWORD) and Date::today <= event.dtstart then
+        if isMatchingEvent(event) then
           data.add_event(event)
         end
       }
@@ -21,6 +19,9 @@ class HokkaidoItCalendar
     writedate
   end
   private
+  def isMatchingEvent(event)
+    return DateTime.parse(get_base_datetime) <= event.created && event.summary.match(KEYWORD)
+  end
   def get_base_datetime
     File::open(DATETIME_FILE_NAME){|f|
       return f.gets
