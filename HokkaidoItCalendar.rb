@@ -1,5 +1,7 @@
+# coding: utf-8
 require 'icalendar'
 require 'open-uri'
+require 'date'
 
 class HokkaidoItCalendar
   KEYWORD = '北海道'
@@ -20,12 +22,13 @@ class HokkaidoItCalendar
   end
   private
   def isMatchingEvent(event)
-    return DateTime.parse(get_base_datetime) <= event.created && event.summary.match(KEYWORD)
+    return get_base_datetime <= event.created && event.summary.match(KEYWORD)
   end
   def get_base_datetime
     File::open(DATETIME_FILE_NAME){|f|
-      return f.gets
+      return DateTime.parse(f.gets)
     }
+    return DateTime.parse('2010-01-01')
   end
   def writedate
     datetext = File.open(DATETIME_FILE_NAME, "w")

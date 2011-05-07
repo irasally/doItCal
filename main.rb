@@ -1,6 +1,5 @@
 require 'rubygems'
-require 'HokkaidoItCalendar'
-$KCODE = 'u'
+require_relative 'HokkaidoItCalendar'
 
 calendar = HokkaidoItCalendar.new
 calendar.create
