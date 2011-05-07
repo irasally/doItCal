@@ -6,7 +6,7 @@ require 'date'
 class HokkaidoItCalendar
   KEYWORD = '北海道'
   DATETIME_FILE_NAME = 'icaldatetime.txt'
-  CALENDAR_URL = 'http://www.google.com/calendar/ical/fvijvohm91uifvd9hratehf65k%40group.calendar.google.com/public/basic.ics'
+  CALENDAR_URL = 'http://www.google.com/calendar/ical/fvijvohm91uifvd9hratehf65k%40group.calendar.google.com/public/basic.ics'  
   def create
     data = Icalendar::Calendar.new
     open(CALENDAR_URL) {|f|
@@ -28,7 +28,6 @@ class HokkaidoItCalendar
     File::open(DATETIME_FILE_NAME){|f|
       return DateTime.parse(f.gets)
     }
-    return DateTime.parse('2010-01-01')
   end
   def writedate
     datetext = File.open(DATETIME_FILE_NAME, "w")
