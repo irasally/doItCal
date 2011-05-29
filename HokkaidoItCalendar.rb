@@ -5,7 +5,8 @@ require 'date'
 
 class HokkaidoItCalendar
   KEYWORD = '北海道'
-  DATETIME_FILE_NAME = 'icaldatetime.txt'
+  DATETIME_FILE_NAME = '/Users/sally/Develop/DoITCalendar/icaldatetime.txt'
+  OUTPUT_FILE_FORMAT = '%Y%m%d%H%M'
   CALENDAR_URL = 'http://www.google.com/calendar/ical/fvijvohm91uifvd9hratehf65k%40group.calendar.google.com/public/basic.ics'  
   def create
     data = Icalendar::Calendar.new
@@ -17,7 +18,9 @@ class HokkaidoItCalendar
         end
       }
     }
-    writeical(data)
+    if data.events.size != 0 then
+      writeical(data)
+    end
     writedate
   end
   private
@@ -35,7 +38,7 @@ class HokkaidoItCalendar
     datetext.close
   end
   def writeical(data)
-    output = File.open("HokkaidoIT_#{Date::today.strftime("%Y%m%d")}.ical", "w")
+    output = File.open("HokkaidoIT_#{Date::today.strftime(OUTPUT_FILE_FORMAT)}.ical", "w")
     output.write(data.to_ical)
     output.close
   end
