@@ -38,7 +38,7 @@ class HokkaidoItCalendar
     datetext.close
   end
   def writeical(data)
-    output = File.open("HokkaidoIT_#{Date::today.strftime(OUTPUT_FILE_FORMAT)}.ical", "w")
+    output = File.open("HokkaidoIT_#{DateTime::now.strftime(OUTPUT_FILE_FORMAT)}.ical", "w")
     output.write(data.to_ical)
     output.close
   end
