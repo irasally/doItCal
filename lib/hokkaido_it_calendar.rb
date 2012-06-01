@@ -7,15 +7,21 @@ require 'net/http'
 require 'date'
 
 module HokkaidoItCalendar
+  OUTPUT_FILE_FORMAT = '%Y%m%d%H%M'
+
   def self.run
     last_access = LastAccess.new
-    HokkaidoItCalendar.new(last_access.get).create
+    ical = HokkaidoItCalendar.new(last_access.get).to_ical
+      unless ical.events.empty?
+        output = File.open("Develop/doItCal/HokkaidoIT_#{DateTime::now.strftime(OUTPUT_FILE_FORMAT)}.ical", "w")
+        output.write(ical.to_ical)
+        output.close
+      end
     last_access.put
   end
 
   class HokkaidoItCalendar
     KEYWORD = '北海道'
-    OUTPUT_FILE_FORMAT = '%Y%m%d%H%M'
     CALENDAR_URL = 'http://www.google.com/calendar/ical/fvijvohm91uifvd9hratehf65k%40group.calendar.google.com/public/basic.ics'
 
     def initialize since
@@ -38,13 +44,6 @@ module HokkaidoItCalendar
       }
     end
 
-    def create
-      unless to_ical.events.empty?
-        output = File.open("Develop/doItCal/HokkaidoIT_#{DateTime::now.strftime(OUTPUT_FILE_FORMAT)}.ical", "w")
-        output.write(to_ical.to_ical)
-        output.close
-      end
-    end
     private
     def isMatchingEvent(event)
       return @since <= event.created && event.summary.match(KEYWORD)
