@@ -14,9 +14,10 @@ module HokkaidoItCalendar
     last_access = LastAccess.new(ROOT)
     ical = HokkaidoItCalendar.new(last_access.get).to_ical
     unless ical.events.empty?
-      output = File.open("Develop/doItCal/HokkaidoIT_#{DateTime::now.strftime(OUTPUT_FILE_FORMAT)}.ical", "w")
-      output.write(ical.to_ical)
-      output.close
+      date_for_filename = DateTime.now.strftime(OUTPUT_FILE_FORMAT)
+      ext_name = '.ical'
+      fullpath = File.join(ROOT, date_for_filename + ext_name)
+      File.write(fullpath, ical.to_ical)
     end
     last_access.put
   end
