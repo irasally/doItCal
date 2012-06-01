@@ -40,9 +40,7 @@ module HokkaidoItCalendar
       }
     end
     def writedate
-      datetext = File.open(DATETIME_FILE_NAME, "w")
-      datetext.write("#{DateTime::now}")
-      datetext.close
+      LastAccess.new.put
     end
     def writeical(data)
       output = File.open("Develop/doItCal/HokkaidoIT_#{DateTime::now.strftime(OUTPUT_FILE_FORMAT)}.ical", "w")
