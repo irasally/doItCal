@@ -50,4 +50,13 @@ module HokkaidoItCalendar
       output.close
     end
   end
+
+  class LastAccess
+    DATETIME_FILE_NAME = '/Users/sally/Develop/doItCal/icaldatetime.txt'
+    def put
+      datetext = File.open(DATETIME_FILE_NAME, "w")
+      datetext.write("#{DateTime::now}")
+      datetext.close
+    end
+  end
 end
