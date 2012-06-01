@@ -29,12 +29,12 @@ module HokkaidoItCalendar
     def create
       data = Icalendar::Calendar.new
       f = source
-        cal = Icalendar.parse(f).first
-        cal.events.each { |event|
-          if isMatchingEvent(event) then
-            data.add_event(event)
-          end
-        }
+      cal = Icalendar.parse(f).first
+      cal.events.each { |event|
+        if isMatchingEvent(event) then
+          data.add_event(event)
+        end
+      }
       if data.events.size != 0 then
         writeical(data)
       end
