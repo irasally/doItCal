@@ -7,7 +7,9 @@ require 'date'
 
 module HokkaidoItCalendar
   def self.run
-    HokkaidoItCalendar.new.create
+    last_access = LastAccess.new
+    HokkaidoItCalendar.new(last_access.get).create
+    last_access.put
   end
 
   class HokkaidoItCalendar
@@ -15,8 +17,8 @@ module HokkaidoItCalendar
     OUTPUT_FILE_FORMAT = '%Y%m%d%H%M'
     CALENDAR_URL = 'http://www.google.com/calendar/ical/fvijvohm91uifvd9hratehf65k%40group.calendar.google.com/public/basic.ics'
 
-    def initialize
-      @last_access = LastAccess.new
+    def initialize since
+      @since = since
     end
 
     def create
@@ -32,11 +34,10 @@ module HokkaidoItCalendar
       if data.events.size != 0 then
         writeical(data)
       end
-      @last_access.put
     end
     private
     def isMatchingEvent(event)
-      return @last_access.get <= event.created && event.summary.match(KEYWORD)
+      return @since <= event.created && event.summary.match(KEYWORD)
     end
     def writeical(data)
       output = File.open("Develop/doItCal/HokkaidoIT_#{DateTime::now.strftime(OUTPUT_FILE_FORMAT)}.ical", "w")
