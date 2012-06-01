@@ -5,12 +5,14 @@ require 'icalendar'
 require 'uri'
 require 'net/http'
 require 'date'
+require 'fileutils'
 
 module HokkaidoItCalendar
   ROOT = File.expand_path('~/hokkaido_it_calendar')
   OUTPUT_FILE_FORMAT = '%Y%m%d%H%M'
 
   def self.run
+    FileUtils.mkdir_p(ROOT)
     last_access = LastAccess.new(ROOT)
     ical = HokkaidoItCalendar.new(last_access.get).to_ical
     unless ical.events.empty?
@@ -71,6 +73,8 @@ module HokkaidoItCalendar
     def get
       doc = File.read(fullpath)
       DateTime.parse(doc)
+    rescue
+      DateTime.new
     end
 
     def put
