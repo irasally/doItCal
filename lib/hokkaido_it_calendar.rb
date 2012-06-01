@@ -7,10 +7,11 @@ require 'net/http'
 require 'date'
 
 module HokkaidoItCalendar
+  ROOT = File.expand_path('~/hokkaido_it_calendar')
   OUTPUT_FILE_FORMAT = '%Y%m%d%H%M'
 
   def self.run
-    last_access = LastAccess.new
+    last_access = LastAccess.new(ROOT)
     ical = HokkaidoItCalendar.new(last_access.get).to_ical
     unless ical.events.empty?
       output = File.open("Develop/doItCal/HokkaidoIT_#{DateTime::now.strftime(OUTPUT_FILE_FORMAT)}.ical", "w")
@@ -57,6 +58,10 @@ module HokkaidoItCalendar
 
   class LastAccess
     DATETIME_FILE_NAME = '/Users/sally/Develop/doItCal/icaldatetime.txt'
+
+    def initialize root
+      @root = root
+    end
 
     def get
       File::open(DATETIME_FILE_NAME){|f|
