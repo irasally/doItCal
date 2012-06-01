@@ -14,6 +14,11 @@ module HokkaidoItCalendar
     KEYWORD = '北海道'
     OUTPUT_FILE_FORMAT = '%Y%m%d%H%M'
     CALENDAR_URL = 'http://www.google.com/calendar/ical/fvijvohm91uifvd9hratehf65k%40group.calendar.google.com/public/basic.ics'
+
+    def initialize
+      @last_access = LastAccess.new
+    end
+
     def create
       data = Icalendar::Calendar.new
       open(CALENDAR_URL) {|f|
@@ -34,10 +39,10 @@ module HokkaidoItCalendar
       return get_base_datetime <= event.created && event.summary.match(KEYWORD)
     end
     def get_base_datetime
-      LastAccess.new.get
+      @last_access.get
     end
     def writedate
-      LastAccess.new.put
+      @last_access.put
     end
     def writeical(data)
       output = File.open("Develop/doItCal/HokkaidoIT_#{DateTime::now.strftime(OUTPUT_FILE_FORMAT)}.ical", "w")
