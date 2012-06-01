@@ -34,6 +34,10 @@ module HokkaidoItCalendar
       @source = Icalendar.parse(doc).first # doc have always only one calendar
     end
 
+    def new_event? event
+      @since <= event.created
+    end
+
     def new_matching_events
       source.events.select(&:isMatchingEvent)
     end
@@ -46,7 +50,7 @@ module HokkaidoItCalendar
 
     private
     def isMatchingEvent(event)
-      return @since <= event.created && event.summary.match(KEYWORD)
+      return new_event? && event.summary.match(KEYWORD)
     end
   end
 
