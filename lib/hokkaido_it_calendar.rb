@@ -73,9 +73,7 @@ module HokkaidoItCalendar
     end
 
     def put
-      datetext = File.open(DATETIME_FILE_NAME, "w")
-      datetext.write("#{DateTime::now}")
-      datetext.close
+      File.write(fullpath, DateTime.now.to_s)
     end
   end
 end
