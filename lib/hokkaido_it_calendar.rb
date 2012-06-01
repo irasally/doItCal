@@ -23,7 +23,8 @@ module HokkaidoItCalendar
     end
 
     def source
-      @source ||= Net::HTTP.get(URI.parse(CALENDAR_URL))
+      return @source if @source
+      @source = Net::HTTP.get(URI.parse(CALENDAR_URL))
     end
 
     def create
