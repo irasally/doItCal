@@ -68,9 +68,8 @@ module HokkaidoItCalendar
     end
 
     def get
-      File::open(DATETIME_FILE_NAME){|f|
-        return DateTime.parse(f.gets)
-      }
+      doc = File.read(fullpath)
+      DateTime.parse(doc)
     end
 
     def put

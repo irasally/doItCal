@@ -5,21 +5,6 @@ module HokkaidoItCalendar
   end
 
   describe LastAccess do
-    describe '#get' do
-      before do
-        file = double('file')
-        file.stub(:gets).and_return(filedata)
-        File.stub(:open).with(LastAccess::DATETIME_FILE_NAME).and_yield(file)
-      end
-
-      let(:filedata) { '2012-06-03T0:37:10+9:00' }
-
-      it 'should parse date' do
-        DateTime.should_receive(:parse).with(filedata)
-        subject.send(:get)
-      end
-    end
-
     describe '#put' do
       before do
         File.stub(:open).with(LastAccess::DATETIME_FILE_NAME, 'w').and_return(file)
