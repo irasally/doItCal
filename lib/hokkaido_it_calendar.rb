@@ -51,6 +51,13 @@ module HokkaidoItCalendar
 
   class LastAccess
     DATETIME_FILE_NAME = '/Users/sally/Develop/doItCal/icaldatetime.txt'
+
+    def get
+      File::open(DATETIME_FILE_NAME){|f|
+        return DateTime.parse(f.gets)
+      }
+    end
+
     def put
       datetext = File.open(DATETIME_FILE_NAME, "w")
       datetext.write("#{DateTime::now}")
