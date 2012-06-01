@@ -24,12 +24,13 @@ module HokkaidoItCalendar
 
     def source
       return @source if @source
-      @source = Net::HTTP.get(URI.parse(CALENDAR_URL))
+      doc = Net::HTTP.get(URI.parse(CALENDAR_URL)).force_encoding('UTF-8')
+      @source = Icalendar.parse(doc).first # doc have always only one calendar
     end
 
     def create
       data = Icalendar::Calendar.new
-      cal = Icalendar.parse(source).first
+      cal = source
       cal.events.each { |event|
         if isMatchingEvent(event) then
           data.add_event(event)
