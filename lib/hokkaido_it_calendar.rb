@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 require "hokkaido_it_calendar/version"
 
-module HokkaidoItCalendar
 require 'icalendar'
 require 'open-uri'
 require 'date'
 
+module HokkaidoItCalendar
 class HokkaidoItCalendar
   KEYWORD = '北海道'
   DATETIME_FILE_NAME = '/Users/sally/Develop/doItCal/icaldatetime.txt'
