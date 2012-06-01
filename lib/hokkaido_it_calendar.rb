@@ -40,17 +40,14 @@ module HokkaidoItCalendar
 
     def create
       unless to_ical.events.empty?
-        writeical(to_ical)
+      output = File.open("Develop/doItCal/HokkaidoIT_#{DateTime::now.strftime(OUTPUT_FILE_FORMAT)}.ical", "w")
+      output.write(to_ical.to_ical)
+      output.close
       end
     end
     private
     def isMatchingEvent(event)
       return @since <= event.created && event.summary.match(KEYWORD)
-    end
-    def writeical(data)
-      output = File.open("Develop/doItCal/HokkaidoIT_#{DateTime::now.strftime(OUTPUT_FILE_FORMAT)}.ical", "w")
-      output.write(data.to_ical)
-      output.close
     end
   end
 
