@@ -43,18 +43,15 @@ module HokkaidoItCalendar
     end
 
     def new_matching_events
-      source.events.select(&:isMatchingEvent)
+      source.events.
+        select(&self.method(:new_event?)).
+        select(&self.method(:matching_event?))
     end
 
     def to_ical
       Icalendar::Calendar.new.tap { |ical|
         new_matching_events.each { |event| ical.add_event(event) }
       }
-    end
-
-    private
-    def isMatchingEvent(event)
-      return new_event? && matching_event?
     end
   end
 
