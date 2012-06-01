@@ -40,9 +40,9 @@ module HokkaidoItCalendar
 
     def create
       unless to_ical.events.empty?
-      output = File.open("Develop/doItCal/HokkaidoIT_#{DateTime::now.strftime(OUTPUT_FILE_FORMAT)}.ical", "w")
-      output.write(to_ical.to_ical)
-      output.close
+        output = File.open("Develop/doItCal/HokkaidoIT_#{DateTime::now.strftime(OUTPUT_FILE_FORMAT)}.ical", "w")
+        output.write(to_ical.to_ical)
+        output.close
       end
     end
     private
