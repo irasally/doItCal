@@ -35,9 +35,7 @@ module HokkaidoItCalendar
       return get_base_datetime <= event.created && event.summary.match(KEYWORD)
     end
     def get_base_datetime
-      File::open(DATETIME_FILE_NAME){|f|
-        return DateTime.parse(f.gets)
-      }
+      LastAccess.new.get
     end
     def writedate
       LastAccess.new.put
