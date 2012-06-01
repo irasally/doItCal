@@ -1,4 +1,4 @@
-#!/opt/local/bin/ruby
+#!/usr/bin/env ruby
 require 'hokkaido_it_calendar'
 
 calendar = HokkaidoItCalendar::HokkaidoItCalendar.new
