@@ -57,10 +57,14 @@ module HokkaidoItCalendar
   end
 
   class LastAccess
-    DATETIME_FILE_NAME = '/Users/sally/Develop/doItCal/icaldatetime.txt'
+    LASTACCESS_RECORD_FILE_NAME = 'lastaccess'
 
     def initialize root
       @root = root
+    end
+
+    def fullpath
+      File.join(@root, LASTACCESS_RECORD_FILE_NAME)
     end
 
     def get
