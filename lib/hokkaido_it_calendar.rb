@@ -21,7 +21,7 @@ module HokkaidoItCalendar
   end
 
   class HokkaidoItCalendar
-    KEYWORD = '北海道'
+    KEYWORD = /北海道/
     CALENDAR_URL = 'http://www.google.com/calendar/ical/fvijvohm91uifvd9hratehf65k%40group.calendar.google.com/public/basic.ics'
 
     def initialize since
@@ -38,6 +38,10 @@ module HokkaidoItCalendar
       @since <= event.created
     end
 
+    def matching_event? event
+      event.summary =~ KEYWORD
+    end
+
     def new_matching_events
       source.events.select(&:isMatchingEvent)
     end
@@ -50,7 +54,7 @@ module HokkaidoItCalendar
 
     private
     def isMatchingEvent(event)
-      return new_event? && event.summary.match(KEYWORD)
+      return new_event? && matching_event?
     end
   end
 
