@@ -32,9 +32,14 @@ module HokkaidoItCalendar
       source.events.select(&:isMatchingEvent)
     end
 
+    def to_ical
+      Icalendar::Calendar.new.tap { |ical|
+        new_matching_events.each { |event| ical.add_event(event) }
+      }
+    end
+
     def create
-      data = Icalendar::Calendar.new
-      new_matching_events.each { |event| data.add_event(event) }
+      data = to_ical
       if data.events.size != 0 then
         writeical(data)
       end
