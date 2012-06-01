@@ -36,10 +36,7 @@ module HokkaidoItCalendar
     end
     private
     def isMatchingEvent(event)
-      return get_base_datetime <= event.created && event.summary.match(KEYWORD)
-    end
-    def get_base_datetime
-      @last_access.get
+      return @last_access.get <= event.created && event.summary.match(KEYWORD)
     end
     def writeical(data)
       output = File.open("Develop/doItCal/HokkaidoIT_#{DateTime::now.strftime(OUTPUT_FILE_FORMAT)}.ical", "w")
