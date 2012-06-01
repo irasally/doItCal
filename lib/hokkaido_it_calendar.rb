@@ -12,7 +12,6 @@ module HokkaidoItCalendar
 
   class HokkaidoItCalendar
     KEYWORD = '北海道'
-    DATETIME_FILE_NAME = '/Users/sally/Develop/doItCal/icaldatetime.txt'
     OUTPUT_FILE_FORMAT = '%Y%m%d%H%M'
     CALENDAR_URL = 'http://www.google.com/calendar/ical/fvijvohm91uifvd9hratehf65k%40group.calendar.google.com/public/basic.ics'
     def create
