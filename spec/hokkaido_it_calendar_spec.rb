@@ -16,6 +16,21 @@ module HokkaidoItCalendar
         subject.send(:writedate)
       end
     end
+
+    describe '#get_base_datetime' do
+      before do
+        file = double('file')
+        file.stub(:gets).and_return(filedata)
+        File.stub(:open).with(HokkaidoItCalendar::DATETIME_FILE_NAME).and_yield(file)
+      end
+
+      let(:filedata) { '2012-06-03T0:37:10+9:00' }
+
+      it 'should parse date' do
+        DateTime.should_receive(:parse).with(filedata)
+        subject.send(:get_base_datetime)
+      end
+    end
   end
 
   describe LastAccess do
