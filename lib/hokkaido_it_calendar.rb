@@ -2,7 +2,8 @@
 require "hokkaido_it_calendar/version"
 
 require 'icalendar'
-require 'open-uri'
+require 'uri'
+require 'net/http'
 require 'date'
 
 module HokkaidoItCalendar
@@ -21,16 +22,19 @@ module HokkaidoItCalendar
       @since = since
     end
 
+    def source
+      @source ||= Net::HTTP.get(URI.parse(CALENDAR_URL))
+    end
+
     def create
       data = Icalendar::Calendar.new
-      open(CALENDAR_URL) {|f|
+      f = source
         cal = Icalendar.parse(f).first
         cal.events.each { |event|
           if isMatchingEvent(event) then
             data.add_event(event)
           end
         }
-      }
       if data.events.size != 0 then
         writeical(data)
       end
