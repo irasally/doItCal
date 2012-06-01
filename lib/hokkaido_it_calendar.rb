@@ -39,7 +39,7 @@ module HokkaidoItCalendar
     end
 
     def create
-      if to_ical.events.size != 0 then
+      unless to_ical.events.empty?
         writeical(to_ical)
       end
     end
