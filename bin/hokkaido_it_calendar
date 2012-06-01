@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
 require 'hokkaido_it_calendar'
 
-calendar = HokkaidoItCalendar::HokkaidoItCalendar.new
-calendar.create
+HokkaidoItCalendar.run

@@ -6,6 +6,10 @@ require 'open-uri'
 require 'date'
 
 module HokkaidoItCalendar
+  def self.run
+    HokkaidoItCalendar.new.create
+  end
+
   class HokkaidoItCalendar
     KEYWORD = '北海道'
     DATETIME_FILE_NAME = '/Users/sally/Develop/doItCal/icaldatetime.txt'
