@@ -12,11 +12,11 @@ module HokkaidoItCalendar
   def self.run
     last_access = LastAccess.new
     ical = HokkaidoItCalendar.new(last_access.get).to_ical
-      unless ical.events.empty?
-        output = File.open("Develop/doItCal/HokkaidoIT_#{DateTime::now.strftime(OUTPUT_FILE_FORMAT)}.ical", "w")
-        output.write(ical.to_ical)
-        output.close
-      end
+    unless ical.events.empty?
+      output = File.open("Develop/doItCal/HokkaidoIT_#{DateTime::now.strftime(OUTPUT_FILE_FORMAT)}.ical", "w")
+      output.write(ical.to_ical)
+      output.close
+    end
     last_access.put
   end
 
