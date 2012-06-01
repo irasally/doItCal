@@ -30,8 +30,7 @@ module HokkaidoItCalendar
 
     def create
       data = Icalendar::Calendar.new
-      cal = source
-      cal.events.each { |event|
+      source.events.each { |event|
         if isMatchingEvent(event) then
           data.add_event(event)
         end
