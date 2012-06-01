@@ -32,7 +32,7 @@ module HokkaidoItCalendar
       if data.events.size != 0 then
         writeical(data)
       end
-      writedate
+      @last_access.put
     end
     private
     def isMatchingEvent(event)
@@ -40,9 +40,6 @@ module HokkaidoItCalendar
     end
     def get_base_datetime
       @last_access.get
-    end
-    def writedate
-      @last_access.put
     end
     def writeical(data)
       output = File.open("Develop/doItCal/HokkaidoIT_#{DateTime::now.strftime(OUTPUT_FILE_FORMAT)}.ical", "w")
