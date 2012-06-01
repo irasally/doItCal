@@ -28,13 +28,13 @@ module HokkaidoItCalendar
       @source = Icalendar.parse(doc).first # doc have always only one calendar
     end
 
+    def new_matching_events
+      source.events.select(&:isMatchingEvent)
+    end
+
     def create
       data = Icalendar::Calendar.new
-      source.events.each { |event|
-        if isMatchingEvent(event) then
-          data.add_event(event)
-        end
-      }
+      new_matching_events.each { |event| data.add_event(event) }
       if data.events.size != 0 then
         writeical(data)
       end
