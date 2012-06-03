@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require 'hokkaido_it_calendar'
+
+HokkaidoItCalendar.run
