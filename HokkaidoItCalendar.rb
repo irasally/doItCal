@@ -19,7 +19,10 @@ class HokkaidoItCalendar
       }
     }
     if data.events.size != 0 then
+      puts 'Create icak file.'
       writeical(data)
+    else
+      puts 'nothing update.'
     end
     writedate
   end
