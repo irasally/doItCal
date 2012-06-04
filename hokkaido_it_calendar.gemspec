@@ -2,10 +2,10 @@
 require File.expand_path('../lib/hokkaido_it_calendar/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["niku"]
-  gem.email         = ["niku@niku.name"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.authors       = ["irasally"]
+  gem.email         = ["sally0721@gmail.com"]
+  gem.description   = %q{make it-workshop calendar st Hokkaido.}
+  gem.summary       = %q{make ical.}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
