@@ -20,7 +20,7 @@ module HokkaidoItCalendar
       ext_name = '.ical'
       fullpath = File.join(ROOT, date_for_filename + ext_name)
       File.write(fullpath, ical.to_ical)
-      puts 'Create ical file:#{fullpath}.'
+      puts "Create ical file:#{fullpath}."
     else
       puts 'Nothing to do.'
     end
