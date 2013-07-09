@@ -6,23 +6,20 @@ IT勉強会カレンダーから[北海道]のタグがついているイベン�
 このスクリプトから作成されているカレンダーは以下のURLで公開されています。
 https://www.google.com/calendar/embed?src=dal3aqnssjr76f2fpocnnb85h0@group.calendar.google.com&ctz=Asia/Tokyo
 
-## Installation
+## Build and Install to local-machine
 
-Add this line to your application's Gemfile:
-
-    gem 'hokkaido_it_calendar'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install hokkaido_it_calendar
+    $ gem build hokkaido_it_calendar.gemspec
+    $ gem install hokkaido_it_calendar-x.x.x.gem
 
 ## Usage
 
-TODO: Write usage instructions here
+    $ mkdir ~/hokkaido_it_calendar
+    $ touch lastaccess
+    $ bundle install
+    $ hokkaido_it_calendar
+
+'yyyymmddHHMM.ical' created in the ~/hokkaido_it_calendar directory.
+You can import that file to your calendar.
 
 ## Contributing
 
