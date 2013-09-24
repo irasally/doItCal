@@ -29,7 +29,7 @@ module HokkaidoItCalendar
 
   class HokkaidoItCalendar
     KEYWORD = /北海道/
-    CALENDAR_URL = 'http://www.google.com/calendar/ical/fvijvohm91uifvd9hratehf65k%40group.calendar.google.com/public/basic.ics'
+    CALENDAR_URL = 'https://www.google.com/calendar/ical/fvijvohm91uifvd9hratehf65k%40group.calendar.google.com/public/basic.ics'
 
     def initialize since
       @since = since
