@@ -16,6 +16,7 @@ module HokkaidoItCalendar
     last_access = LastAccess.new(ROOT)
     ical = HokkaidoItCalendar.new(last_access.get).to_ical
     unless ical.events.empty?
+      puts 'ical file create start.....'
       date_for_filename = DateTime.now.strftime(OUTPUT_FILE_FORMAT)
       ext_name = '.ical'
       fullpath = File.join(ROOT, date_for_filename + ext_name)
@@ -37,8 +38,13 @@ module HokkaidoItCalendar
 
     def source
       return @source if @source
+      puts 'Calender data download start.....'
       doc = Net::HTTP.get(URI.parse(CALENDAR_URL)).force_encoding('UTF-8')
+      puts 'Calender data downloaded.'
       @source = Icalendar.parse(doc).first # doc have always only one calendar
+    rescue => e
+      puts e
+      raise 'exception occerd'
     end
 
     def new_event? event
@@ -57,8 +63,13 @@ module HokkaidoItCalendar
 
     def to_ical
       Icalendar::Calendar.new.tap { |ical|
+        puts 'ical data filtering start.....'
         new_matching_events.each { |event| ical.add_event(event) }
+        puts 'ical data filtered.'
       }
+    rescue => e
+      puts e
+      raise 'exception occerd'
     end
   end
 
