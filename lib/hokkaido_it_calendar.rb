@@ -4,7 +4,6 @@ require "hokkaido_it_calendar/version"
 require 'icalendar'
 require 'uri'
 require 'net/http'
-require 'date'
 require 'fileutils'
 
 module HokkaidoItCalendar
@@ -41,7 +40,7 @@ module HokkaidoItCalendar
       puts 'Calender data download start.....'
       doc = Net::HTTP.get(URI.parse(CALENDAR_URL)).force_encoding('UTF-8')
       puts 'Calender data downloaded.'
-      @source = Icalendar.parse(doc).first # doc have always only one calendar
+      @source = Icalendar::Parser.new(doc, false).parse.first
     rescue => e
       puts e
       raise 'exception occerd'
