@@ -8,4 +8,5 @@ gem 'guard', require: false
 gem 'guard-rspec', require: false
 gem 'ruby_gntp', require: false
 
+gem 'activesupport', require: false
 gem 'icalendar'
