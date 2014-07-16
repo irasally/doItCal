@@ -47,7 +47,7 @@ module HokkaidoItCalendar
     end
 
     def new_event? event
-      @since <= event.created
+      @since <= event.created.to_datetime
     end
 
     def matching_event? event
